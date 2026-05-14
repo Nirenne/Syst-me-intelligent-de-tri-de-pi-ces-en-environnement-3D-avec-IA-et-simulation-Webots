@@ -54,6 +54,12 @@ def attendre(steps):
     for _ in range(steps):
         robot.step(timestep)
         
+def attendre_pos(sensor, target, tolerance=0.01):
+    # On a enlevé la ligne motor.setPosition(target)
+    while robot.step(timestep) != -1:
+        if abs(sensor.getValue() - target) < tolerance:
+            break
+        
 def pos_Bouteille():
     base.setPosition(0)
     upperarm.setPosition(-0.20)
@@ -62,6 +68,7 @@ def pos_Bouteille():
     rotational_wrist.setPosition(-2.9932)
     gripper_left.setPosition(-1.22)
     gripper_right.setPosition(1.22)
+    attendre(50)
     
 def pos_can():
     base.setPosition(0)
@@ -71,30 +78,32 @@ def pos_can():
     rotational_wrist.setPosition(-2.9932)
     gripper_left.setPosition(-1.22)
     gripper_right.setPosition(1.22)
+    attendre(50)
 
 def bouger_soda():
     gripper_left.setPosition(-0.1)
     gripper_right.setPosition(0.1)
-    attendre(40)
-    upperarm.setPosition(-0.205)
-    attendre(20)
-    #base.setPosition(5.8)
-    attendre(base.setPosition(5.8))
+    attendre(80)
+    upperarm.setPosition(-0.25)
+    attendre_pos(s_upper, -0.205)
+    base.setPosition(5.8)
+    attendre_pos(s_base, 5.8)
     gripper_left.setPosition(-1.22)
     gripper_right.setPosition(1.22)
     attendre(50)
     print("ARM : objet déposé !")
     
 def bouger_Bouteille():
-    gripper_left.setPosition(-0.2)
-    gripper_right.setPosition(0.2)
+    gripper_left.setPosition(-0.58)
+    gripper_right.setPosition(0.58)
     attendre(80)
     upperarm.setPosition(-0.205)
+    attendre_pos(s_upper, -0.205)
     base.setPosition(0.85)
-    attendre(100)
+    attendre_pos(s_base, 0.85)
     gripper_left.setPosition(-1.22)
     gripper_right.setPosition(1.22)
-    attendre(50)
+    attendre(70)
     print("ARM : objet déposé !")
     
 def pos_initial():
@@ -146,7 +155,6 @@ while robot.step(timestep) != -1:
     if msg_recu is not None and ds0.getValue() > 10 and not en_cours:
         en_cours = True
         print(f"ARM : DÉCLENCHEMENT → {msg_recu}  ds0={ds0.getValue():.1f}")
- 
         if msg_recu == "SODA":
             bouger_soda()
         elif msg_recu == "WATER":
