@@ -1,0 +1,192 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/drinks/protos/Can.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/drinks/protos/WaterBottle.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/conveyors/protos/ConveyorBelt.proto"
+EXTERNPROTO "../protos/IprHd6ms180_modifier.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  fieldOfView 1
+  orientation -0.48070966356556566 0.5127880171675679 0.7113133408027961 1.7317947618399647
+  position 0.6563549428403609 -0.44870123281928126 1.1124345656535999
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Robot {
+  children [
+    DEF emitter Emitter {
+    }
+    DEF receiver Receiver {
+    }
+  ]
+  name "SUPERVISOR"
+  controller "supervisor"
+  supervisor TRUE
+}
+Robot {
+  translation 0 0.6 0
+  children [
+    DistanceSensor {
+      rotation 0 0 1 -1.5708
+      name "sensor"
+      lookupTable [
+        0 0 0
+        1 1000 0
+      ]
+    }
+    Emitter {
+      channel 1
+    }
+    Camera {
+      translation -0.01 0 0.3
+      rotation 0 0 1 -1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.05 0.1 0.05
+          }
+        }
+      ]
+      fieldOfView 1
+      width 416
+      height 416
+    }
+  ]
+  name "VISION"
+  controller "vision"
+}
+ConveyorBelt {
+  hidden translation_1 -3.294712287656171e-05 3.3553085421101127e-06 0.14989557073162824
+  hidden rotation_1 0.02387962661119658 0.9996991450273592 -0.0056020410991507235 3.3608059095990106e-05
+  hidden linearVelocity_1 4.204029596419901e-05 -1.446157155193184e-05 0.00011643443624814154
+  hidden angularVelocity_1 -1.9527754260073634e-06 -6.593280988220273e-05 -6.755695694463618e-06
+  size 1.5 0.5 0.2
+  speed 0.1
+}
+Solid {
+  translation 0.8 -0.15 0.1
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 1
+      }
+      geometry Box {
+        size 0.3 0.1 0.3
+      }
+    }
+  ]
+  name "BIN_WATER"
+}
+Solid {
+  translation 0.8 0.2 0.1
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+      }
+      geometry Box {
+        size 0.3 0.1 0.3
+      }
+    }
+  ]
+  name "BIN_SODA"
+}
+DEF test IprHd6ms180_modifier {
+  hidden position_0_0 0.3679979489561618
+  hidden rotation_3 0 0 0.9999999999999999 0.4927889489561621
+  hidden position_3_0 -0.20499868460962284
+  hidden linearVelocity_3 -2.7392811726653922e-05 0.00021139032561012919 -2.5652027368050752e-05
+  hidden angularVelocity_3 -2.962693832704207e-06 -9.950695760602435e-06 0.4999999992949004
+  hidden rotation_4 -1 0 0 0.39277631539037644
+  hidden position_4_0 1.2500009431910375
+  hidden linearVelocity_4 0.006744940813963487 -0.016371515375495048 -5.1886213360394345e-05
+  hidden angularVelocity_4 -1.5760637674210647e-06 -9.430514466650999e-06 0.4999973852104744
+  hidden rotation_5 1 0 0 0.9717990568089624
+  hidden position_5_0 9.929813277020641e-06
+  hidden linearVelocity_5 0.00805326016236888 -0.019147111112743392 -7.764589919819597e-05
+  hidden angularVelocity_5 2.9622063241562224e-07 -2.2993254089504853e-05 0.49999526613480755
+  hidden rotation_6 -1 0 0 2.0333199298132763
+  hidden position_6_0 -2.9932010793651393
+  hidden linearVelocity_6 0.00785851655496002 -0.019915773389456336 -0.00011299729866285984
+  hidden angularVelocity_6 0.00012493212234432411 -0.00018787441824854342 0.4999938441600518
+  hidden rotation_7 0 0 -1 1.1079331508416445e-05
+  hidden position_7_0 0.20000000149651828
+  hidden position_7_1 0.2000000014960403
+  hidden linearVelocity_7 0.041040441796391935 -0.10909504812250641 -0.00018219732389595895
+  hidden angularVelocity_7 0.00014484076411960486 -0.00018651761127367174 0.4999895167588484
+  hidden rotation_8 0 0.9999999999999999 0 0.20000000149651898
+  hidden linearVelocity_8 0.05188239964838136 -0.16429050334323203 -0.00024090187697604147
+  hidden angularVelocity_8 0.0001440571333216684 -0.0001884960186537396 0.4999896848006104
+  hidden translation_13 0.00572103537816715 -3.888596951967527e-05 0.03240278788117712
+  hidden rotation_13 1.5878195291101444e-07 0.9999999999999778 -1.3917095662833642e-07 0.19199998458323375
+  hidden linearVelocity_13 0.04788379511392563 -0.15340875978960708 -0.0002500450542442799
+  hidden angularVelocity_13 0.00014385063090470015 -0.00018874896851719497 0.49998960036944545
+  hidden translation_14 -7.953821718892362e-06 5.329780027257813e-05 0.08382691040691492
+  hidden rotation_14 0.867253027231345 -0.46873408425271573 -0.16781103961848182 3.138786999773181e-11
+  hidden linearVelocity_14 0.0557571942968693 -0.17867390344581885 -0.00024777113883680304
+  hidden angularVelocity_14 0.00014405717478206833 -0.0001884961596401375 0.49998968497293866
+  hidden rotation_16 0 -1 0 0.20000000149604077
+  hidden linearVelocity_16 0.06927090793251914 -0.15772974264562342 -0.0002000550684046903
+  hidden angularVelocity_16 0.00014434294105892625 -0.00018601389618039802 0.4999895502626411
+  hidden translation_21 -0.007748809258635914 2.7199745168959844e-06 0.032445240948499876
+  hidden rotation_21 5.57426999189561e-11 1 -1.607660193917557e-10 2.9496853070627633
+  hidden linearVelocity_21 0.06597752194550513 -0.146394515500802 -0.00019476376800398713
+  hidden angularVelocity_21 0.00014434061275242672 -0.00018601229999270894 0.4999895508024794
+  hidden translation_22 3.897707665034833e-05 3.781293427262966e-07 0.08376781040440628
+  hidden rotation_22 -6.969176243587775e-09 1 -1.1021669366794844e-08 -3.1414999712167786
+  hidden linearVelocity_22 0.07580970305796696 -0.17106730632256165 -0.0001990140515729154
+  hidden angularVelocity_22 0.0001442297082624076 -0.00018603939738680807 0.49998956563916297
+  translation 1.05 3.87318e-08 -0.22
+  rotation 0 0 -1 -1.446
+  name "IPR(1)"
+  controller "arm"
+  sensorsSlot [
+    Emitter {
+    }
+    DEF receiver Receiver {
+      channel 1
+    }
+  ]
+}
+DEF TARGET Solid {
+  translation 0.7345676837721876 0.14780103771119563 0.24076578499725818
+  rotation -0.019649693407765557 -0.9996695320167708 -0.01657456805926532 1.6344130924016789
+  name "Can"
+  boundingObject Box {
+    size 0.08 0.2 0.08
+  }
+  physics Physics {
+    mass 0.2
+  }
+  linearVelocity -0.024076934333934735 -0.0006074364186623368 0.05284371136038811
+  angularVelocity 0.03239935233916991 -0.7417030095906814 0.0012910244677545313
+}
+DEF TARGET Solid {
+  translation 0.6278621956637569 -0.11143409670905084 0.3025326202733822
+  rotation 0.7459929300133504 -0.6344013309724045 0.20255739836041042 1.8562582093306461
+  children [
+    DEF ITEM WaterBottle {
+    }
+  ]
+  name "WaterBottle(1)"
+  boundingObject Box {
+    size 0.08 0.2 0.08
+  }
+  physics Physics {
+    mass 0.2
+  }
+  linearVelocity 0.4109941796214313 -0.28962499224532123 0.23690924168933897
+  angularVelocity 2.3037125831932137 5.6712713216404325 -0.42567398470188744
+}

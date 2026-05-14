@@ -1,0 +1,160 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/drinks/protos/Can.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/drinks/protos/WaterBottle.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/conveyors/protos/ConveyorBelt.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/neuronics/ipr/protos/IprHd6ms180.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  fieldOfView 1
+  orientation 0.3767814738927264 -0.2095408432756744 -0.9022906161157523 4.415165288485448
+  position 1.341775911248683 -1.4856626362625842 2.138117447699095
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Robot {
+  children [
+    Receiver {
+    }
+  ]
+  name "SUPERVISOR"
+  controller "supervisor"
+  supervisor TRUE
+}
+Robot {
+  translation 0 0.6 0
+  children [
+    DistanceSensor {
+      rotation 0 0 1 -1.5708
+      name "sensor"
+      lookupTable [
+        0 0 0
+        1 1000 0
+      ]
+    }
+    Emitter {
+    }
+    Camera {
+      translation -0.01 0 0.3
+      rotation 0 0 1 -1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.05 0.1 0.05
+          }
+        }
+      ]
+      fieldOfView 1
+      width 416
+      height 416
+    }
+  ]
+  name "VISION"
+  controller "vision"
+}
+ConveyorBelt {
+  hidden translation_1 -8.355544260736272e-10 3.4506301061018333e-13 0.14989800408891202
+  hidden rotation_1 3.7051413251415474e-08 -0.9999999999999989 -3.203007630049026e-08 2.336451433443983e-05
+  hidden linearVelocity_1 1.3597805471406938e-10 9.596342799654284e-20 -1.000096892767033e-08
+  hidden angularVelocity_1 7.116843884092621e-17 1.8790496310691753e-06 -4.9693290963206717e-20
+  size 1.5 0.5 0.2
+  speed 0.1
+}
+Solid {
+  translation 0.8 -0.15 0.1
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 1
+      }
+      geometry Box {
+        size 0.3 0.1 0.3
+      }
+    }
+  ]
+  name "BIN_WATER"
+}
+Solid {
+  translation 0.8 0.2 0.1
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+      }
+      geometry Box {
+        size 0.3 0.1 0.3
+      }
+    }
+  ]
+  name "BIN_SODA"
+}
+DEF Armbot IprHd6ms180 {
+  hidden position_0_0 -1.1594545304479158e-06
+  hidden rotation_1 0 0 1 0.12478984054547133
+  hidden position_1_0 3.4591721349274307e-07
+  hidden rotation_2 -0.9999999999999999 0 0 0.5977753459172127
+  hidden position_2_0 -9.561750524748564e-07
+  hidden rotation_3 1 0 0 2.221800956175052
+  hidden position_3_0 3.4969702712804267e-07
+  hidden rotation_4 -1 0 0 2.033310349697027
+  hidden position_4_0 3.7545666045598495e-07
+  hidden rotation_5 0 0 1 2.9931903754566602
+  hidden position_5_0 -5.365864286233091e-08
+  hidden position_5_1 5.4911226944286524e-08
+  hidden rotation_6 0 -1 0 5.16191365590357e-08
+  hidden translation_11 0.005700046133819914 -3.085776054678746e-07 0.03249928072937003
+  hidden rotation_11 -6.080868076257944e-15 1 5.79130292976947e-16 0.1919999999999996
+  hidden translation_12 4.613410309328714e-08 -3.08577641217056e-07 0.08369928072942107
+  hidden rotation_12 -0.3812020593055457 -0.9244149938159483 0.011912564353298303 1.4562133093505626e-15
+  hidden rotation_14 0 -0.9999999999999999 0 5.16191365590357e-08
+  hidden translation_19 -0.007699953866187936 -3.0857781063708956e-07 0.032499280729516966
+  hidden rotation_19 3.3809158328608357e-16 -1 -3.764318659267735e-15 -2.9496853071795894
+  hidden translation_20 4.613411797027567e-08 -3.085777181555116e-07 0.08369928072947735
+  hidden rotation_20 3.625572068682078e-16 -1 -4.718447859720216e-15 3.141499999999997
+  translation 0.58 -0.44 0
+  controller "arm"
+}
+DEF barre Solid {
+  translation 0.66 0 0.21
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.333333 0
+        }
+      }
+      geometry Box {
+        size 0.09 0.6 0.007
+      }
+    }
+  ]
+}
+DEF TARGET Solid {
+  translation -0.44320232158421324 -1.95115793140898e-13 0.2394159073866615
+  rotation 3.543580328980284e-08 -0.9999999999999996 3.677230273911747e-12 2.4617230897224295e-05
+  children [
+    DEF ITEM WaterBottle {
+    }
+  ]
+  name "WaterBottle"
+  boundingObject Box {
+    size 0.08 0.2 0.08
+  }
+  physics Physics {
+    mass 0.2
+  }
+  linearVelocity 0.10000049765505746 -7.497843825481479e-14 9.923376341249407e-06
+  angularVelocity 6.393655928555463e-16 2.534454251929668e-06 1.3341081123608044e-16
+}
