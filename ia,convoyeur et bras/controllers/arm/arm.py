@@ -50,30 +50,31 @@ receiver.setChannel(1)
 emitter = robot.getDevice("emitter")
 emitter.setChannel(0)
 
+#--------------------------------------------------------------- 
 def attendre(steps):
     for _ in range(steps):
         robot.step(timestep)
+        afficher_capteurs()
         
 def attendre_pos(sensor, target, tolerance=0.01):
-    # On a enlevé la ligne motor.setPosition(target)
     while robot.step(timestep) != -1:
+        afficher_capteurs()
         if abs(sensor.getValue() - target) < tolerance:
-            break
-        
-def pos_Bouteille():
-    base.setPosition(0)
-    upperarm.setPosition(-0.20)
-    forearm.setPosition(1.25)
-    wrist.setPosition(0)
-    rotational_wrist.setPosition(-2.9932)
-    gripper_left.setPosition(-1.22)
-    gripper_right.setPosition(1.22)
-    attendre(50)
-    
+            break  
+def afficher_capteurs():
+    print(f"base={s_base.getValue():.3f} | "
+          f"upper={s_upper.getValue():.3f} | "
+          f"fore={s_fore.getValue():.3f} | "
+          f"wrist={s_wrist.getValue():.3f} | "
+          f"grip_L={s_grip_l.getValue():.3f} | "
+          f"grip_R={s_grip_r.getValue():.3f} | "
+          f"ds0={ds0.getValue():.1f} | ")
+          
+#---------------------------------------------------------------   
 def pos_can():
-    base.setPosition(0)
+    base.setPosition(3.015)
     upperarm.setPosition(-0.25)
-    forearm.setPosition(1.28)
+    forearm.setPosition(1.45)
     wrist.setPosition(0)
     rotational_wrist.setPosition(-2.9932)
     gripper_left.setPosition(-1.22)
@@ -81,33 +82,43 @@ def pos_can():
     attendre(50)
 
 def bouger_soda():
-    gripper_left.setPosition(-0.1)
-    gripper_right.setPosition(0.1)
+    gripper_left.setPosition(-0.02)
+    gripper_right.setPosition(0.02)
     attendre(80)
-    upperarm.setPosition(-0.25)
-    attendre_pos(s_upper, -0.205)
-    base.setPosition(5.8)
-    attendre_pos(s_base, 5.8)
+    upperarm.setPosition(-0.4)
+    attendre_pos(s_upper, -0.4)
+    base.setPosition(2.103)
+    attendre_pos(s_base, 2.103)
     gripper_left.setPosition(-1.22)
     gripper_right.setPosition(1.22)
     attendre(50)
     print("ARM : objet déposé !")
-    
-def bouger_Bouteille():
-    gripper_left.setPosition(-0.58)
-    gripper_right.setPosition(0.58)
-    attendre(80)
-    upperarm.setPosition(-0.205)
-    attendre_pos(s_upper, -0.205)
-    base.setPosition(0.85)
-    attendre_pos(s_base, 0.85)
+ #---------------------------------------------------------------
+def pos_Bouteille():
+    base.setPosition(3.015)
+    upperarm.setPosition(-0.18)
+    forearm.setPosition(1.25)
+    wrist.setPosition(0)
+    rotational_wrist.setPosition(-2.9932)
     gripper_left.setPosition(-1.22)
     gripper_right.setPosition(1.22)
+    attendre(50)
+    
+def bouger_Bouteille():
+    gripper_left.setPosition(-0.3)
+    gripper_right.setPosition(0.3)
+    attendre(80)
+    upperarm.setPosition(-0.22)
+    attendre_pos(s_upper, -0.22)
+    base.setPosition(3.927)
+    attendre_pos(s_base, 3.927)
+    gripper_left.setPosition(-1)
+    gripper_right.setPosition(1)
     attendre(70)
     print("ARM : objet déposé !")
-    
+#---------------------------------------------------------------  
 def pos_initial():
-            base.setPosition(0)
+            base.setPosition(3.015)
             upperarm.setPosition(-0.20)
             forearm.setPosition(1.25)
             wrist.setPosition(0)
@@ -124,17 +135,8 @@ while robot.step(timestep) != -1:
     step += 1
 
     if step % 10 == 0:
-        print(f"base={s_base.getValue():.3f} | "
-              f"upper={s_upper.getValue():.3f} | "
-              f"fore={s_fore.getValue():.3f} | "
-              f"wrist={s_wrist.getValue():.3f} | "
-              f"grip_L={s_grip_l.getValue():.3f} | "
-              f"grip_R={s_grip_r.getValue():.3f} | "
-              f"ds0={ds0.getValue():.1f} | "
-              f"ds1={ds1.getValue():.1f} | "
-              f"ds2={ds2.getValue():.1f} | "
-              f"ds3={ds3.getValue():.1f} | "
-              f"ds4={ds4.getValue():.1f}")
+         afficher_capteurs()   
+              
     # stocke le message dès qu'il arrive
     if receiver.getQueueLength() > 0:
         msg = receiver.getString()
@@ -172,4 +174,4 @@ while robot.step(timestep) != -1:
         en_cours = False
             # --- FIN DE CYCLE ---
         emitter.send("DONE".encode())
-        print("ARM : DONE — retour idle")
+        print("ARM : DONE — retour position initial")
